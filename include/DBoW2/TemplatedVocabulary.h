@@ -1473,12 +1473,14 @@ void TemplatedVocabulary<TDescriptor,F>::load(const cv::FileStorage &fs,
   m_nodes.resize(fn.size() + 1); // +1 to include root
   m_nodes[0].id = 0;
 
-  for(unsigned int i = 0; i < fn.size(); ++i)
+  for (cv::FileNodeIterator it=fn.begin(); it!=fn.end(); ++it)
   {
-    NodeId nid = (int)fn[i]["nodeId"];
-    NodeId pid = (int)fn[i]["parentId"];
-    WordValue weight = (WordValue)fn[i]["weight"];
-    std::string d = (std::string)fn[i]["descriptor"];
+    const cv::FileNode &node = *it;
+
+    NodeId nid = (int)node["nodeId"];
+    NodeId pid = (int)node["parentId"];
+    WordValue weight = (WordValue)node["weight"];
+    std::string d = (std::string)node["descriptor"];
     
     m_nodes[nid].id = nid;
     m_nodes[nid].parent = pid;
@@ -1493,10 +1495,12 @@ void TemplatedVocabulary<TDescriptor,F>::load(const cv::FileStorage &fs,
   
   m_words.resize(fn.size());
 
-  for(unsigned int i = 0; i < fn.size(); ++i)
+  for (cv::FileNodeIterator it=fn.begin(); it!=fn.end(); ++it)
   {
-    NodeId wid = (int)fn[i]["wordId"];
-    NodeId nid = (int)fn[i]["nodeId"];
+    const cv::FileNode &word = *it;
+
+    NodeId wid = (int)word["wordId"];
+    NodeId nid = (int)word["nodeId"];
     
     m_nodes[nid].word_id = wid;
     m_words[wid] = &m_nodes[nid];

@@ -10,7 +10,7 @@
 #include <vector>
 
 // DBoW2
-#include "DBoW2.h" // defines OrbVocabulary and OrbDatabase
+#include "DBoW2/DBoW2.h" // defines OrbVocabulary and OrbDatabase
 
 // OpenCV
 #include <opencv2/core.hpp>
@@ -51,7 +51,7 @@ int main()
 
   testVocCreation(features);
 
-  wait();
+//  wait();
 
   testDatabase(features);
 
@@ -71,7 +71,7 @@ void loadFeatures(vector<vector<cv::Mat > > &features)
   for(int i = 0; i < NIMAGES; ++i)
   {
     stringstream ss;
-    ss << "images/image" << i << ".png";
+    ss << "../demo/images/image" << i << ".png";
 
     cv::Mat image = cv::imread(ss.str(), 0);
     cv::Mat mask;

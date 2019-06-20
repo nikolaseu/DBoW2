@@ -2,15 +2,11 @@
 
 # Windows
 win32 {
-    OPENCV_DIR = C:/Tools/vcpkg/installed/x64-windows # assuming vcpkg installed at C:/Tools/vcpkg/
-    OPENCV_VER = 341
+    OPENCV_DIR = C:/Users/nikol/Projects/opencv-4.1.0-vc14_vc15/build
+    OPENCV_VER = 410
 
     OPENCV_INCLUDE_DIR = $$OPENCV_DIR/include
-    CONFIG(release, debug|release) {
-        OPENCV_LIB_DIR = $$OPENCV_DIR/lib
-    } else {
-        OPENCV_LIB_DIR = $$OPENCV_DIR/debug/lib
-    }
+    OPENCV_LIB_DIR = $$OPENCV_DIR/x64/vc15/lib
 }
 
 # Linux
@@ -30,7 +26,12 @@ android: {
     include(opencv_android.pri)
 }
 
-CV_LIB_NAMES = core imgcodecs features2d #imgproc videoio calib3d flann highgui rgbd viz
+win32: {
+CV_LIB_NAMES = world
+}
+else: {
+CV_LIB_NAMES = core imgproc imgcodecs videoio calib3d features2d flann highgui #rgbd viz
+}
 
 for(lib, CV_LIB_NAMES) {
     CV_LIBS += -lopencv_$$lib

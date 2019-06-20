@@ -1,4 +1,5 @@
 TEMPLATE = lib
+CONFIG  += staticlib
 CONFIG  -= qt
 TARGET   = DBoW2
 DESTDIR  = $$PWD/../bin

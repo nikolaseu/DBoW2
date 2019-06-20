@@ -3,6 +3,11 @@ CONFIG  -= qt
 TARGET   = DBoW2
 DESTDIR  = $$PWD/../bin
 
+# add has suffix 'd' to debug version
+CONFIG(debug, debug|release) {
+    TARGET = $$join(TARGET,,,_d)
+}
+
 include(../3rdparty/opencv.pri)
 
 HEADERS += \
